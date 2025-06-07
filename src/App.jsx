@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import ListCard from "./components/ListCard";
 
 // https://restcountries.com/v3.1/region/europe
 
@@ -15,6 +16,7 @@ function App() {
           if (a.name.common > b.name.common) return 1;
           return 0;
         });
+        setCountries(data);
       });
   }, []);
   return (
@@ -24,6 +26,16 @@ function App() {
         <p className="text-gray-100 text-xl mb-8">
           Click on a card to real a contry's information.
         </p>
+        {countries && (
+          <ul
+            className="grid min-[450px]:grid-cols-2 md:grid-cols-3
+            lg:grid-cols-4 gap-10 auto-rows-[200px]"
+          >
+            {countries.map((country, index) => (
+              <ListCard key={index} country={country} />
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );
