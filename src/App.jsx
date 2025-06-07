@@ -9,8 +9,12 @@ function App() {
     fetch("https://restcountries.com/v3.1/region/europe")
       .then((response) => response.json())
       .then((data) => {
-        setCountries(data);
         console.log(data);
+        data.sort((a, b) => {
+          if (a.name.common < b.name.common) return -1;
+          if (a.name.common > b.name.common) return 1;
+          return 0;
+        });
       });
   }, []);
   return (
